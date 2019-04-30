@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="body">
+
+  <div class="container-fluid">
+
+    <div class="jumbotron text-center">
+      <h1><strong>Mission to Mars</strong></h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>      
+    </div>
+   
+    <h2><strong>Latest Mars News</strong></h2>
+    <h4><strong>{{mars_data.news_title}}</strong></h4> 
+    <p>{{mars_data.news_p}}</p>
+
+    
+  </div>
+
+
+  <div class="container">
+
+      <div class="row">
+        <!-- First column -->
+        <div class="white col-md-6 col-sm-12 col-5 first2">
+          <br>
+          <h3><strong>Featured Mars Image</strong></h3>
+          <img src="{{ mars_data.featured_image_url }}" alt="Featured Image" style="float:left" width=90%>          
+        </div>
+        <!-- Second column -->
+        <div class="grayColor col-md-1 col-sm-12 col-1"></div>
+        <!-- Third column -->
+        <div class="white col-md-5 col-sm-12 col-5 second2">
+          <br>
+          <h4><strong>Current Weather on Mars</strong></h4>
+          <hr>
+          <p>{{mars_data.mars_weather}}</p>   
+          <hr>
+          <h4><strong>Mars Facts</strong></h4>
+          {{ mars_data.properties|safe }}         
+        </div>
+      </div>
+
+      <div class="row">
+          <!-- First column -->
+          <div class="white col-md-12 col-sm-12 col-12 first2">
+            <br>
+            <h4><p style="text-align:center;">Mars Hemispheres</p></h4>                     
+          </div>
+      </div>
+      
+      <div class="row">
+          <!-- First column -->
+          <div class="white col-md-6 col-sm-6 col-6 first2">
+            <br>
+            <ul style="list-style: none;">
+                {% for name in mars_data.hemisphere_image_urls[0:2] %}
+                  <li><img src="{{ name.img_url }}" width=99%></li>
+                  <li><strong>{{ name.title }}</strong></li>
+                {% endfor %}                
+            </ul> 
+          </div>
+
+          <!-- Second column -->
+          <div class="white col-md-6 col-sm-6 col-6 first2">
+              <br>
+              <ul style="list-style: none;">
+                  {% for name in mars_data.hemisphere_image_urls[2:] %}
+                    <li><img src="{{ name.img_url }}" width=99%></li>
+                    <li><strong>{{ name.title }}</strong></li>
+                  {% endfor %}                
+              </ul> 
+            </div>
+      </div>
+     
+
+  </div>
+
+</body>
+
+</html>
